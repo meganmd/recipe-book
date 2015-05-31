@@ -2,7 +2,7 @@ package measurement;
 
 import java.lang.Integer;
 import java.lang.Math;
-import java.lang.IllegalArgumentException;
+import java.lang.NumberFormatException;
 import java.lang.ArithmeticException;
 import java.util.zip.DataFormatException;
 
@@ -74,7 +74,7 @@ public class Fraction
 		}
 		else 
 		{
-			throw new IllegalArgumentException("Fraction is not in correct format" + 
+			throw new NumberFormatException("Fraction is not in correct format" + 
 			" of:    a b/c    or    b/c");
 		}
 		reduce();
@@ -132,7 +132,7 @@ public class Fraction
 		}
 		else 
 		{
-			throw new IllegalArgumentException("Fraction is not in correct format" + 
+			throw new NumberFormatException("Fraction is not in correct format" + 
 			" of:    a b/c    or    b/c");
 		}
 	}

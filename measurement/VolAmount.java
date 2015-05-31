@@ -1,22 +1,52 @@
-import java.lang.Math;
+package measurement;
+
+import java.util.HashSet;
 
 public class VolAmount
 {
 	private Fraction amount;
 	private String unit;
+	private HashSet<String> units = new HashSet<String>();
 	
-	public VolAmount(int numerator, int denominator String unit)
+	public VolAmount(Fraction amount, String unit)
 	{
-		this.amount = new Fraction(numerator, denominator);
-		this.unit = unit;
+		this.amount = amount;
+		setUnit(unit);
 	}
 	
-	public double amount()
+	public VolAmount(String string)
+	{
+		String[] pieces = string.split(" ");
+		if (pieces.length == 2)
+		{
+			amount = new Fraction(pieces[0]);
+			setUnit(pieces[1]);	
+		}
+		else if (pieces.length == 3)
+		{
+			new Fraction(pieces[0] + " " + pieces[1]);
+			setUnit(pieces[2]);
+		}
+		else
+			throw new IllegalArgumentException("String must be in format " +
+								"'a b/c units', 'a units', or 'b/c units'");
+	}
+	
+	private void setUnit(String unit)
+	{
+		if (unit.charAt(unit.length()-1)=='s')
+			this.unit = (unit.substring(0, unit.length()-1)).toLowerCase();
+		else
+			this.unit = unit.toLowerCase();
+		units.add(unit.toLowerCase());
+	}
+	
+	public double getAmount()
 	{
 		return amount.toDouble();
 	}
 	
-	public String unit()
+	public String getUnit()
 	{
 		return unit;
 	}

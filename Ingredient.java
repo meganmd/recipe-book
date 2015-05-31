@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.lang.Integer;
 
+import measurement.VolAmount;
+
 public class Ingredient
 {
 	//private static int CaloriesPerOz;
