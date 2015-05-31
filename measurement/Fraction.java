@@ -13,6 +13,8 @@ import java.util.zip.DataFormatException;
 public class Fraction
 {	
 	private int numerator, denominator;
+	private static String fractionFormatErrorMessage = "Fraction is not in correct format" + 
+			" of: 'a b/c', 'a', or 'b/c'";
 
 	/**
 	* Constructor declares numerator and denominator and reduces fraction. 
@@ -47,11 +49,11 @@ public class Fraction
 	}
 	
 	/**
-	* Constructor takes a string of format "a/b" or "a b/c" where a, b, c 
+	* Constructor takes a string of format "a/b", "a", or "a b/c" where a, b, c 
 	* are ints. Will throw ArithmeticException if dividing by 0 
 	* and IllegalArgumentException if not in correct format.
 	* Reduces fraction. Normalizes sign.
-	* @param string is the input string of form "a/b" or "a b/c"
+	* @param string is the input string of form "a/b", "a", or "a b/c"
 	*/
 	public Fraction(String string)
 	{
@@ -74,8 +76,7 @@ public class Fraction
 		}
 		else 
 		{
-			throw new NumberFormatException("Fraction is not in correct format" + 
-			" of:    a b/c    or    b/c");
+			throw new NumberFormatException(fractionFormatErrorMessage);
 		}
 		reduce();
 		normalizeSign();
@@ -130,10 +131,20 @@ public class Fraction
 				throw new ArithmeticException("No dividing by 0");
 			}
 		}
+		if (pieces.length ==1)
+		{
+			try
+			{
+				return new int[]{Integer.parseInt(pieces[0]),1};
+			}
+			catch(NumberFormatException e)
+			{
+				throw new NumberFormatException(fractionFormatErrorMessage);
+			}
+		}
 		else 
 		{
-			throw new NumberFormatException("Fraction is not in correct format" + 
-			" of:    a b/c    or    b/c");
+			throw new NumberFormatException(fractionFormatErrorMessage);
 		}
 	}
 	
@@ -211,7 +222,7 @@ public class Fraction
 			wholes++;
 			absNum -= denominator;
 		}
-		return(new int[]{ wholes * sign, numerator * sign, denominator});
+		return(new int[]{ wholes * sign, absNum * sign, denominator});
 	}
 	
 	/**

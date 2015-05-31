@@ -78,6 +78,8 @@ public class FractionTest
 		System.out.println(".125 = " + new Fraction(.125).toString());
 		System.out.println(".3333333333333333 =" + 
 							new Fraction(.3333333333333333).toString());
+		System.out.println("3 = " + new Fraction("3"));
+		System.out.println("-1 1/2 = " + new Fraction("-1 1/2"));
 		
 	}
 	
